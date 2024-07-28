@@ -1,0 +1,19 @@
+<div>
+  <mat-form-field>
+    <mat-label>Seleccione un nivel</mat-label>
+    <mat-select [formControl]="selectedLevel">
+      @for (level of levels; track level) {
+        <mat-option [value]="level.value">{{level.viewValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div>
+  <hot-table [settings]="hotSettings" [data]="data()">
+    <!-- <hot-column data="codigoPuc" title="CÓDIGO PUC"></hot-column>
+    <hot-column data="nombreCuenta" title="NOMBRE DE LA CUENTA"></hot-column>
+    <hot-column data="saldoA31Dic" title="SALDO A 31 DIC" format="$0,0.00" type="numeric"></hot-column>
+    <hot-column data="nivel" title="NIVEL"></hot-column> -->
+  </hot-table>
+</div>

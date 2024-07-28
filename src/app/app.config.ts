@@ -7,13 +7,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { bceReducer } from './store/reducers/bce.reducer';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(),
-    provideState({ name: 'bce', reducer: bceReducer }),
+    // provideState({ name: 'bce', reducer: bceReducer }),
     provideHttpClient(),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
@@ -22,6 +23,6 @@ export const appConfig: ApplicationConfig = {
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true // If set to true, the connection is established within the Angular zone
-    })
+    }), provideAnimationsAsync()
   ]
 };

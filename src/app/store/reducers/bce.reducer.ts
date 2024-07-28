@@ -6,7 +6,7 @@ export const initialState = {
   away: 0,
 };
 
-const _bceReducer = createReducer(
+export const _bceReducer = createReducer(
   initialState,
   on(storeData, (state, {text}) => ({ ...state, home: state.home + 1, text }) )
 );
