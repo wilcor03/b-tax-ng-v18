@@ -1,16 +1,24 @@
 import { createReducer, on, State } from "@ngrx/store";
-import { storeData } from "../actions/bce.actions";
+import { loadData, loadDataSuccess, storeData } from "../actions/bce.actions";
+import { BceModel } from "@core/models/bce.model";
 
-export const initialState = {
-  home: 10,
-  away: 0,
+export interface BceStateModel {
+  data: BceModel[]
+}
+
+export const initialState: BceStateModel = {
+  data: []
 };
 
-export const _bceReducer = createReducer(
+export const bceReducer = createReducer(
   initialState,
-  on(storeData, (state, {text}) => ({ ...state, home: state.home + 1, text }) )
+  on(loadData, (state) => {
+    return { ...state }
+  }),
+  on(storeData, (state, payload) => ({ ...state, ...payload }) ),
+  on(loadDataSuccess, (state, data) => ({ ...state, ...data }) ),
 );
 
-export function bceReducer(state: any, action: any){
-  return _bceReducer(state, action)
-}
+// export function bceReducer(state: any, action: any){
+//   return _bceReducer(state, action)
+// }

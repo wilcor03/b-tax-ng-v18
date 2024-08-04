@@ -10,7 +10,14 @@
 </div>
 
 <div>
-  <hot-table [settings]="hotSettings" [data]="data()">
+  {{ bceData$ | async | json }}
+</div>
+
+<div>
+  <hot-table
+    [settings]="hotSettings"
+    [hotId]="tableId"
+  >
     <!-- <hot-column data="codigoPuc" title="CÓDIGO PUC"></hot-column>
     <hot-column data="nombreCuenta" title="NOMBRE DE LA CUENTA"></hot-column>
     <hot-column data="saldoA31Dic" title="SALDO A 31 DIC" format="$0,0.00" type="numeric"></hot-column>
