@@ -4,10 +4,10 @@ import { provideState } from '@ngrx/store';
 import { BceEffects } from 'src/app/store/effects/bce.effects';
 import { bceReducer } from 'src/app/store/reducers/bce.reducer';
 
-const sumariaRoutes: Routes = [
+const bceRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./bce.component').then(m => m.BceComponent),
+    loadComponent: () => import('./components/bce/bce.component').then(m => m.BceComponent),
     providers: [
       provideState({ name: 'bce', reducer: bceReducer }),
       provideEffects(BceEffects)
@@ -15,4 +15,4 @@ const sumariaRoutes: Routes = [
   }
 ];
 
-export default sumariaRoutes;
+export default bceRoutes;

@@ -1,11 +1,13 @@
-import { ActionReducerMap } from "@ngrx/store"
-import { bceReducer } from './bce.reducer'
+import { bceReducer, BceStateModel } from './bce.reducer';
+import { sumariaReducer, SumariaStateModel } from './sumaria.reducer';
 
 export interface AppState {
-  bce: any
+  bce: BceStateModel,
+  sumaria: SumariaStateModel
 }
 
 export const appReducers = [
-  { name: 'bce', reducer: bceReducer }
+  { name: 'bce', reducer: bceReducer },
+  { name: 'sumaria', reducer: sumariaReducer },
 ]
 

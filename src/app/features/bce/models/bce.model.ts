@@ -4,4 +4,5 @@ export interface BceModel {
   readonly accountName: string;
   readonly balance31Dec: number;
   readonly accountLevel: string;
+  readonly balanceToTransfer: number;
 }

@@ -49,7 +49,7 @@ export class AppComponent {
   }
 
   testing(){
-    this._store.dispatch(storeData({text: 'el texto'}))
+    // this._store.dispatch(storeData({text: 'el texto'}))
   }  
 
   tiles = [
