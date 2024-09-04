@@ -4,68 +4,8 @@ import { HyperFormula } from 'hyperformula';
 import { SumariaModel } from "../interfaces/sumaria.interface";
 import { Field110 } from "@core/interfaces/field-110.interface";
 
-
-export const SUMARIA_EMTPY_TEMPLATE_TABLE_OBJECT: SumariaModel = {
-  pucCode: null,
-  r33: null,
-  f2516: null,
-  cell110: null,
-  cell: null,
-  accountName: null,
-  accountingValue: null,
-  annexes: null,
-  lowerTaxValue: null,
-  higherTaxValue: null,
-  taxIncomeBalance: null,
-  observations: null
-};
-
-export const SUMARIA_HOT_SETTINGS: Handsontable.GridSettings = {
-  colHeaders:['CÓDIGO PUC', 'R-33', 'F-2516', 'RENGLÓN FORMATO 110', 'RENGLÓN', 'NOMBRE', 'VALOR CONTABLE', 'ANEXOS', 'MENOR VALOR FISCAL', 'MAYOR VALOR FISCAL', 'SALDO FISCAL RENTA', 'OBSERVACIONES'],
-  dataSchema: {
-    pucCode: null,
-    r33: null,
-    f2516: null,
-    cell110: null,
-    cell: null,
-    accountName: null,
-    accountingValue: null,
-    annexes: null,
-    lowerTaxValue: null,
-    higherTaxValue: null,
-    taxIncomeBalance: null,
-    observations: null
-  },
-  startRows: 3000,
-  colWidths: [100, 50, 50, 135, 70, 200, 120, 70, 150, 150, 150, 200],
-  autoWrapRow: true,
-  autoWrapCol: true,
-  licenseKey: HANDSONTABLE_LICENCE,
-  columns: [
-    { data: 'pucCode', type: 'numeric', readOnly: true },
-    { data: 'r33', type: 'numeric' },
-    { data: 'f2516', type: 'numeric' },
-    { data: 'cell110', type: 'numeric' },
-    { data: 'cell', type: 'numeric' },
-    { data: 'accountName' },
-    { data: 'accountingValue' },
-    { data: 'annexes' },
-    { data: 'lowerTaxValue' },
-    { data: 'higherTaxValue' },
-    { data: 'taxIncomeBalance' },
-    { data: 'observations' },
-  ],
-  width: '100%',
-  height: '80vh',
-  rowHeaders: true,
-  formulas: {
-    engine: HyperFormula,
-  },
-};
-
-
-
 export const CELLS_110_FORM: Field110[] = [
+  { code:   '', description: '' },
   { code: '36', description: 'Efectivo y equivalentes al efectivo' },
   { code: '37', description: 'Inversiones e instrumentos financieros derivados' },
   { code: '38', description: 'Cuentas, documentos y arrendamientos financieros por cobrar' },
@@ -99,3 +39,50 @@ export const CELLS_110_FORM: Field110[] = [
   { code: '82', description: 'Ganancias ocacionales no gravadas y exentas' },
   { code: '102',description: 'Crédito fiscal art 256-1ET' }
 ];
+
+const DROPDOWN_SELECTED_OPTIONS = ['Anexos'];
+
+export const SUMARIA_EMTPY_TEMPLATE_TABLE_OBJECT: SumariaModel = {
+  pucCode: null,
+  r33: null,
+  f2516: null,
+  cell110: null,
+  cell: null,
+  accountName: null,
+  accountingValue: null,
+  annexes: null,
+  lowerTaxValue: null,
+  higherTaxValue: null,
+  taxIncomeBalance: null,
+  observations: null
+};
+
+export const SUMARIA_HOT_SETTINGS: Handsontable.GridSettings = {
+  colHeaders:['CÓDIGO PUC', 'R-33', 'F-2516', 'RENGLÓN FORMATO 110', 'RENGLÓN', 'NOMBRE', 'VALOR CONTABLE', 'ANEXOS', 'MENOR VALOR FISCAL', 'MAYOR VALOR FISCAL', 'SALDO FISCAL RENTA', 'OBSERVACIONES'],
+  dataSchema:SUMARIA_EMTPY_TEMPLATE_TABLE_OBJECT,
+  startRows: 3000,
+  colWidths: [100, 50, 50, 170, 70, 200, 120, 70, 150, 150, 150, 200],
+  autoWrapRow: false,
+  autoWrapCol: false,
+  licenseKey: HANDSONTABLE_LICENCE,
+  columns: [
+    { data: 'pucCode', type: 'numeric', readOnly: true },
+    { data: 'r33', type: 'numeric' },
+    { data: 'f2516', type: 'numeric' },
+    { data: 'cell110', type: 'dropdown', source: CELLS_110_FORM.map(item => `${item.code} ${item.description}`) },
+    { data: 'cell', type: 'numeric', readOnly: true },
+    { data: 'accountName' },
+    { data: 'accountingValue', type: 'numeric', numericFormat: { pattern: '$0,0.00', culture: 'en-US' }},
+    { data: 'annexes', type: 'dropdown', source: DROPDOWN_SELECTED_OPTIONS },
+    { data: 'lowerTaxValue' },
+    { data: 'higherTaxValue' },
+    { data: 'taxIncomeBalance' },
+    { data: 'observations' },
+  ],
+  width: '100%',
+  height: '80vh',
+  rowHeaders: true,
+  formulas: {
+    engine: HyperFormula,
+  },
+};

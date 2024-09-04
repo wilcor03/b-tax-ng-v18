@@ -19,26 +19,47 @@ import { loadData, storeData } from '@store/actions/sumaria.actions';
 import { bceAndSumariaMergeData } from 'src/app/store/selectors/sumaria.selectors';
 import { SUMARIA_HOT_SETTINGS } from '@features/sumaria/config/handsontable.config';
 
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { SelectTemplateDialogComponent } from '@shared/components/select-template-dialog/select-template-dialog.component';
+
 registerAllModules();
 
 @Component({
   selector: 'app-sumaria',
   standalone: true,
-  imports: [CommonModule, HotTableModule, MatSelectModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule,
+  HotTableModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatInputModule,
+  FormsModule,
+  ReactiveFormsModule],
   templateUrl: './sumaria.component.html',
   styleUrl: './sumaria.component.scss'
 })
 export class SumariaComponent implements AfterViewInit {
   private _mainTable = new HotTableRegisterer();
-  tableId = 'taxSumaria';
+  private _hsInstance!: Handsontable;
+  private readonly _store = inject(Store<AppState>);
+  private readonly _dialog = inject(MatDialog);
 
+  tableId = 'taxSumaria';
   hotSettings: Handsontable.GridSettings = SUMARIA_HOT_SETTINGS;
 
-  private readonly _store = inject(Store<AppState>);
   data$ = this._store.select(bceAndSumariaMergeData);
 
   ngAfterViewInit(): void {
     this._store.dispatch(loadData());
+
+    this._hsInstance = this._mainTable.getInstance(this.tableId);
 
     this.data$.pipe(
       take(1),
@@ -51,12 +72,24 @@ export class SumariaComponent implements AfterViewInit {
       console.log('from subs sumaria!!!!', data);
     });
 
-    this._mainTable.getInstance(this.tableId).addHook('afterChange', this._onDataUpdated.bind(this));
+    this._hsInstance.addHook('afterChange', this._onDataUpdated.bind(this));
   }
 
   private _onDataUpdated(): void {
-    const payload = [ ...this._mainTable.getInstance(this.tableId).getSourceData() ];
+    const columsData = this._hsInstance.getDataAtProp('annexes');
+    const finded = columsData.some((item) => !!item);
+    console.log('ENCONTRADO', finded);
+
+
+    this._dialog.open(SelectTemplateDialogComponent, {});
+
+
+    const payload = [ ...this._hsInstance.getSourceData() ];
     console.log('NEW DATA', payload);
     this._store.dispatch(storeData( { payload } ));
+  }
+
+  private _openModal(): void {
+
   }
 }

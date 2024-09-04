@@ -51,5 +51,6 @@ const _utilMapBCEAccoutsToSumaria = (bceRow: BceModel, rowNumber: number): Parti
   pucCode: bceRow.pucCode,
   accountName: bceRow.accountName,
   accountingValue: bceRow.balanceToTransfer,
-  taxIncomeBalance: `=G${ rowNumber } - I${ rowNumber } + J${ rowNumber }`
+  taxIncomeBalance: `=G${ rowNumber } - I${ rowNumber } + J${ rowNumber }`,
+  cell: `=SPLIT(D${ rowNumber }, 0)`
 });
