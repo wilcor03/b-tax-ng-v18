@@ -75,17 +75,31 @@ export class SumariaComponent implements AfterViewInit {
     this._hsInstance.addHook('afterChange', this._onDataUpdated.bind(this));
   }
 
-  private _onDataUpdated(): void {
+  private _onDataUpdated(data: any, param2: any): void {
+    console.log('lo que cambio', data, 'segundo p', param2)
+    // const [ rowIndex, colName, otro, cellValue ] = data;
+    // console.log('col name', colName)
+
     const columsData = this._hsInstance.getDataAtProp('annexes');
-    const finded = columsData.some((item) => !!item);
-    console.log('ENCONTRADO', finded);
+    const findedModalDispatcher = columsData.some(item => {
+      // console.log('EL ITEM', !!item);
+      // console.log('EL ITEM', item);
+      return !!item;
+    });
+    // console.log('ENCONTRADO', finded);
 
 
-    this._dialog.open(SelectTemplateDialogComponent, {});
+    if(findedModalDispatcher){ console.log('INDEXXX', data[0][0]);
+      const selectedRow = this._hsInstance.getSourceDataAtRow(0);
+      // console.log('SELECTED ROW', selectedRow);
 
+      this._dialog.open(SelectTemplateDialogComponent, {
+        data: selectedRow
+      });
+    }
 
     const payload = [ ...this._hsInstance.getSourceData() ];
-    console.log('NEW DATA', payload);
+    // console.log('NEW DATA', payload);
     this._store.dispatch(storeData( { payload } ));
   }
 

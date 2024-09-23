@@ -89,13 +89,13 @@ export class BceComponent implements AfterViewInit {
         // this.mainData = [ ...data ];
       })
     ).subscribe((data) => {
-      console.log('from subs!!!!', data);
+      // console.log('from subs!!!!', data);
       // this._stopInitialExecution$.next();
       // this._stopInitialExecution$.complete();
     });
 
     this._mainTable.getInstance(this.tableId).addHook('afterInit', () => {
-      console.log('arranco!!');
+      // console.log('arranco!!');
     });
 
     this._mainTable.getInstance(this.tableId).addHook('afterChange', this._onChangeLevel.bind(this));

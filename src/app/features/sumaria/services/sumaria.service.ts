@@ -22,12 +22,13 @@ export class SumariaService {
     // ];
 
     // this.data = changes;
+    // console.log('DATA FROM SERVICE', this.data)
     return of(this.data);
   }
 
   store(payload: SumariaModel[]):Observable<Partial<SumariaModel[]>> {
     this.data = [...payload];
-    // console.log('FROM PAYLOAD SERVICE', payload);
+    // console.log('FROM PAYLOAD SERVICE W', payload);
     return of(this.data);
   }
 }
