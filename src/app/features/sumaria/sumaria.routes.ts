@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 import { SumariaEffects } from 'src/app/store/effects/sumaria.effects';
+import { EmptyCanvasEffects } from '@store/effects/empty-canvas.effects';
+
 import { bceReducer } from '@store/reducers/bce.reducer';
 import { sumariaReducer } from 'src/app/store/reducers/sumaria.reducer';
+import { emptyCanvasReducer } from '@store/reducers/empty-canvas.reducer';
 
 const sumariaRoutes: Routes = [
   {
@@ -13,7 +16,8 @@ const sumariaRoutes: Routes = [
     providers: [
       provideState({ name: 'sumaria', reducer: sumariaReducer }),
       provideState({ name: 'bce', reducer: bceReducer }),
-      provideEffects(SumariaEffects)
+      provideState({ name: 'empty-canvas', reducer: emptyCanvasReducer }),
+      provideEffects([SumariaEffects, EmptyCanvasEffects])
     ]
   }
 ];

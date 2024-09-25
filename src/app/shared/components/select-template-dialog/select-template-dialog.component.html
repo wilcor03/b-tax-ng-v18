@@ -5,20 +5,20 @@
       <button mat-fab [matMenuTriggerFor]="menu">
         <mat-icon>add</mat-icon>
       </button>
-  
+
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <mat-icon>menu_open</mat-icon>
           <span>Plantilla</span>
         </button>
-        <button mat-menu-item>
+        <button (click)="createEmptyCanvas()" mat-menu-item>
           <mat-icon>check_box_outline_blank</mat-icon>
           <span>Lienzo en blanco</span>
         </button>
       </mat-menu>
     </div>
-    
-    <mat-grid-list cols="12" rowHeight="100px">      
+
+    <mat-grid-list cols="12" rowHeight="100px">
       <mat-grid-tile [colspan]="12">
         <div style="width: 100%;">
           <mat-list>
@@ -29,7 +29,7 @@
             <mat-list-item>
               <span matListItemTitle>Anexo 2</span>
               <span matListItemLine>Extracted from sea water</span>
-            </mat-list-item>          
+            </mat-list-item>
           </mat-list>
         </div>
       </mat-grid-tile>

@@ -1,0 +1,16 @@
+<div style="width: 1200px; height: 800px;">
+  <h2 mat-dialog-title>Anexos</h2>
+  <mat-dialog-content>
+    <div>
+      <hot-table
+        [settings]="hotSettings"
+        [hotId]="tableId"
+      >
+      </hot-table>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <!-- <button mat-button>No Thanks</button> -->
+    <button mat-button [mat-dialog-close]="" cdkFocusInitial>Cerrar</button>
+  </mat-dialog-actions>
+</div>

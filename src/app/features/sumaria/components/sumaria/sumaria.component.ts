@@ -76,7 +76,7 @@ export class SumariaComponent implements AfterViewInit {
   }
 
   private _onDataUpdated(data: any, param2: any): void {
-    console.log('lo que cambio', data, 'segundo p', param2)
+    // console.log('lo que cambio', data, 'segundo p', param2)
     // const [ rowIndex, colName, otro, cellValue ] = data;
     // console.log('col name', colName)
 
@@ -89,9 +89,9 @@ export class SumariaComponent implements AfterViewInit {
     // console.log('ENCONTRADO', finded);
 
 
-    if(findedModalDispatcher){ console.log('INDEXXX', data[0][0]);
-      const selectedRow = this._hsInstance.getSourceDataAtRow(0);
-      // console.log('SELECTED ROW', selectedRow);
+    if(findedModalDispatcher){// console.log('INDEXXX', data[0][0]);
+      const selectedRow = this._hsInstance.getSourceDataAtRow(data[0][0]);
+      //console.log('SELECTED ROW', selectedRow);
 
       this._dialog.open(SelectTemplateDialogComponent, {
         data: selectedRow
